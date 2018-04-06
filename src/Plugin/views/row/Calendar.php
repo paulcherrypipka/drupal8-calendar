@@ -442,7 +442,8 @@ class Calendar extends RowPluginBase {
             $storage_format = DATETIME_DATETIME_STORAGE_FORMAT;
           }
         }
-        $item_start_date = $item_end_date = \DateTime::createFromFormat($storage_format, $row->{$info['query_name']});
+        $event_date_value = (isset($row->{$info['query_name']})) ? $row->{$info['query_name']} : $row->_entity->get($entity_field_name)->getString();
+        $item_start_date = $item_end_date = \DateTime::createFromFormat($storage_format, $event_date_value);
 
 //        $db_tz   = date_get_timezone_db($tz_handling, isset($item->$tz_field) ? $item->$tz_field : timezone_name_get($dateInfo->getTimezone()));
 //        $to_zone = date_get_timezone($tz_handling, isset($item->$tz_field)) ? $item->$tz_field : timezone_name_get($dateInfo->getTimezone());
